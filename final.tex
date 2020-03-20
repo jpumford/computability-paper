@@ -76,15 +76,27 @@
     \end{definition}
 
     \begin{theorem}
-      $c(x)$, $s(x)$, $p_i(x) \in P$
+      $c(x)$, $s(x)$, $p_i(x_1, x_2, ..., x_n) \in P$
     \end{theorem}
     \begin{proof}
+      \begin{equation*}
+        \begin{aligned}
+          c(x) = 0 < x + 1 &= A(0, x) \\
+          s(x) = x + 1 < x + 2 &= A(1, x) \\
+          p_i(x_1, x_2, ..., x_n) = x_i \leq m < m + 1 &= A(0, m) \\
+        \end{aligned}
+      \end{equation*}
+      To verify $x + 2 = A(1, x)$, we proceed by induction. \\
+      $A(1, 0) = A(1 - 1, 1) = A(0, 1) = 2 = 0 + 2$. Now assume $A(1, k) = k + 2$ for some $k \in \mathbb{N}$.
+      Then $A(1, k + 1) = A(1 - 1, A(1, k + 1 - 1)) = A(0, A(1, k)) = A(0, k + 2) = k + 3 = (k + 1) + 2$.
     \end{proof}
 
     \begin{theorem}
       $P$ is closed under composition
     \end{theorem}
     \begin{proof}
+      Let $f, g_1, g_2, ..., g_n \in P$, where $f$ is $n$-ary and each $g_i$ is $m$-ary.
+      Then $f(g_1(x_1, ..., x_m))$
       
     \end{proof}
 
