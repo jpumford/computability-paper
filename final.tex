@@ -1,0 +1,69 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+% math fonts
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+
+\title{Computability via Recursive Functions}
+\author{Justin Pumford  }
+\date{March 2020}
+
+\begin{document}
+  \maketitle
+
+  \section{Effective Calcubility and Computability}
+
+  \section{Primitive Recursive Functions}
+    \subsection{Functions}
+      For this paper, $\mathbb{N}$ refers to the set $\{0, 1, 2, 3, ...\}$
+
+  \section{The Ackermann Function}
+    % nested loop
+    \newtheorem*{A}{Definition}
+    \begin{A}
+      Let $n, m \in \mathbb{N}$. Then define $A(n, m)$ as follows:
+      \begin{equation*}
+        \begin{aligned}
+          A(m, n) &=
+          \begin{cases}
+            n + 1                   & m = 0 \\
+            A(m - 1, 1)             & m > 0 \wedge n = 0 \\
+            A(m - 1, A(m, n - 1))   & m > 0 \wedge n > 0
+          \end{cases}
+        \end{aligned}
+      \end{equation*}
+    \end{A}
+
+    \newtheorem*{inn}{Lemma}
+    \begin{inn}
+      For any $m, n \in mathbb{N}$, $A(m, n) \in \mathbb{N}$
+    \end{inn}
+
+    \newtheorem*{total}{Theorem}
+    \begin{total}
+      A(m, n) is a total function
+    \end{total}
+
+    \begin{proof}
+      We will proceed inductively to show that $A(m, n)$ is defined for all $m, n \in \mathbb{N}$.
+      \\ 
+      \\
+      Clearly $A(0, n)$ is defined for all $n \in \mathbb{N}$.
+      Assume $A(k, n)$ is defined for some $k \in \mathbb{N}$ and every $n \in \mathbb{N}$.
+      Since $k + 1 > 0$, $A(k + 1, 0) = A(k, 1)$, which is defined.
+      \\
+      \\
+      Now we assume $A(k + 1, j)$ is defined for some $j \in \mathbb{N}$.
+      By our lemma, $A(k + 1, j) = a$ for some $a \in \mathbb{N}$.
+      Then since $j + 1 > 0$, $A(k + 1, j + 1) = A(k, A(k + 1, j)) = A(k, a)$.
+      Since $A(k, n)$ is defined for every $n \in \mathbb{N}$ by our inductive hypothesis,
+      $A(k, a) = A(k + 1, j + 1)$ is defined.
+    \end{proof}
+
+
+  \section{General Recursive Functions}
+    \subsection{Partial Functions}
+    \subsection{Definition of General Recursive Functions}
+
+\end{document}
