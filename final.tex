@@ -13,6 +13,7 @@
 \newtheorem{lemma}{Lemma}
 \newtheorem*{definition}{Definition}
 
+% TODO: switch n and m around
 \begin{document}
   \maketitle
 
@@ -21,6 +22,8 @@
   \section{Primitive Recursive Functions}
     \subsection{Functions}
       For this paper, $\mathbb{N}$ refers to the set $\{0, 1, 2, 3, ...\}$
+
+      % zero function MUST accept one argument for further proofs to work
 
   \section{The Ackermann Function}
     % nested loop
@@ -64,6 +67,45 @@
       Then since $j + 1 > 0$, $A(k + 1, j + 1) = A(k, A(k + 1, j)) = A(k, a)$.
       Since $A(k, n)$ is defined for every $n \in \mathbb{N}$ by our inductive hypothesis,
       $A(k, a) = A(k + 1, j + 1)$ is defined.
+    \end{proof}
+    
+    \begin{definition}
+      Let $P$ be the set of all primitive recursive functions so that if $f(x_1, x_2, ..., x_n) \in P$ and
+      $m = max\{x_1, x_2, ..., x_n\}$, then there exists $t \in \mathbb{N}$ so that 
+      $f(x_1, x_2, ..., x_n) < A(t, m)$
+    \end{definition}
+
+    \begin{theorem}
+      $c(x)$, $s(x)$, $p_i(x) \in P$
+    \end{theorem}
+    \begin{proof}
+    \end{proof}
+
+    \begin{theorem}
+      $P$ is closed under composition
+    \end{theorem}
+    \begin{proof}
+      
+    \end{proof}
+
+    \begin{theorem}
+      $P$ is closed under primitive recursion
+    \end{theorem}
+    \begin{proof}
+      
+    \end{proof}
+
+    \begin{theorem}
+      $P$ is precisely the primitive recursive functions
+    \end{theorem}
+    \begin{proof}
+    \end{proof}
+
+    \begin{theorem}
+      $A(m, n)$ is not a primitive recursive function
+    \end{theorem}
+    \begin{proof}
+      Proof Here
     \end{proof}
 
 
