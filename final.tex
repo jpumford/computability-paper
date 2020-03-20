@@ -9,6 +9,10 @@
 \author{Justin Pumford  }
 \date{March 2020}
 
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{definition}{Definition}
+
 \begin{document}
   \maketitle
 
@@ -20,8 +24,7 @@
 
   \section{The Ackermann Function}
     % nested loop
-    \newtheorem*{A}{Definition}
-    \begin{A}
+    \begin{definition}[The Ackermann Function]
       Let $n, m \in \mathbb{N}$. Then define $A(n, m)$ as follows:
       \begin{equation*}
         \begin{aligned}
@@ -33,17 +36,19 @@
           \end{cases}
         \end{aligned}
       \end{equation*}
-    \end{A}
+    \end{definition}
 
-    \newtheorem*{inn}{Lemma}
-    \begin{inn}
-      For any $m, n \in mathbb{N}$, $A(m, n) \in \mathbb{N}$
-    \end{inn}
+    \begin{lemma}
+      \label{inn}
+      For any $m, n \in \mathbb{N}, A(m, n) \in \mathbb{N}$
+    \end{lemma}
+    \begin{proof}
+      Proof Here
+    \end{proof}
 
-    \newtheorem*{total}{Theorem}
-    \begin{total}
+    \begin{theorem}
       A(m, n) is a total function
-    \end{total}
+    \end{theorem}
 
     \begin{proof}
       We will proceed inductively to show that $A(m, n)$ is defined for all $m, n \in \mathbb{N}$.
@@ -55,7 +60,7 @@
       \\
       \\
       Now we assume $A(k + 1, j)$ is defined for some $j \in \mathbb{N}$.
-      By our lemma, $A(k + 1, j) = a$ for some $a \in \mathbb{N}$.
+      By Lemma \ref{inn}, $A(k + 1, j) = a$ for some $a \in \mathbb{N}$.
       Then since $j + 1 > 0$, $A(k + 1, j + 1) = A(k, A(k + 1, j)) = A(k, a)$.
       Since $A(k, n)$ is defined for every $n \in \mathbb{N}$ by our inductive hypothesis,
       $A(k, a) = A(k + 1, j + 1)$ is defined.
