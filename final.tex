@@ -44,7 +44,7 @@
           \begin{gathered}
             1 \leq i \leq n
             \\
-            p(x_1, ..., x_n) = x_i
+            p_i(x_1, ..., x_n) = x_i
           \end{gathered}
         \end{equation*}
         \item Function composition \\
@@ -74,28 +74,34 @@
       Let $n, m \in \mathbb{N}$. Then define $A(n, m)$ as follows:
       \begin{equation*}
         \begin{aligned}
-          A(m, n) &=
+          A(n, m) &=
           \begin{cases}
-            n + 1                   & m = 0 \\
-            A(m - 1, 1)             & m > 0 \wedge n = 0 \\
-            A(m - 1, A(m, n - 1))   & m > 0 \wedge n > 0
+            m + 1                   & n = 0 \\
+            A(n - 1, 1)             & n > 0 \wedge m = 0 \\
+            A(n - 1, A(n, m - 1))   & n > 0 \wedge m > 0
           \end{cases}
         \end{aligned}
       \end{equation*}
     \end{definition}
 
-    \begin{lemma}
-      \label{inn}
-      For any $m, n \in \mathbb{N}, A(m, n) \in \mathbb{N}$
-    \end{lemma}
+    \begin{theorem}
+      \label{inN}
+      For any $n, m \in \mathbb{N}, A(n, m) \in \mathbb{N}$
+    \end{theorem}
     \begin{proof}
-      Proof Here
+      We proceed by double induction. \\
+      Clearly $A(0, k) \in \mathbb{N}$ for every $k \in \mathbb{N}$ because $k + 1 \in \mathbb{N}$.
+      Now assume $A(k, m) \in \mathbb{N}$ for some $k \in mathbb{N}$ for every $m \in \mathbb{N}$.
+      Then $A(k + 1, 0) = A(k + 1 - 1, 1) = A(k, 1) \in \mathbb{N}$.
+      Now assume $A(k + 1, j) \in \mathbb{N}$ for some $j \in \mathbb{N}$.
+      Then $A(k + 1, j + 1) = A(k + 1 - 1, A(k + 1, j + 1 - 1)) = A(k, A(k + 1, j))$.
+      By our second hypothesis $A(k + 1, j) \in \mathbb{N}$, so by our first hypothesis $A(k, A(k + 1, j)) \in \mathbb{N}$.
+      Therefore $A(k + 1, j + 1) \in \mathbb{N}$
     \end{proof}
 
     \begin{theorem}
       A(m, n) is a total function
     \end{theorem}
-
     \begin{proof}
       We will proceed inductively to show that $A(m, n)$ is defined for all $m, n \in \mathbb{N}$.
       \\ 
@@ -106,7 +112,7 @@
       \\
       \\
       Now we assume $A(k + 1, j)$ is defined for some $j \in \mathbb{N}$.
-      By Lemma \ref{inn}, $A(k + 1, j) = a$ for some $a \in \mathbb{N}$.
+      By Lemma \ref{inN}, $A(k + 1, j) = a$ for some $a \in \mathbb{N}$.
       Then since $j + 1 > 0$, $A(k + 1, j + 1) = A(k, A(k + 1, j)) = A(k, a)$.
       Since $A(k, n)$ is defined for every $n \in \mathbb{N}$ by our inductive hypothesis,
       $A(k, a) = A(k + 1, j + 1)$ is defined.
@@ -133,17 +139,28 @@
     \begin{proof}
       Proof here
     \end{proof}
+
+    \begin{theorem}
+      \label{x+2=A(1,x)}
+      For any $x \in \mathbb{N}$, $x + 2 = A(1, x)$
+    \end{theorem}
+    \begin{proof}
+      We proceed by induction. \\
+      $A(1, 0) = A(1 - 1, 1) = A(0, 1) = 2 = 0 + 2$. Now assume $A(1, k) = k + 2$ for some $k \in \mathbb{N}$.
+      Then $A(1, k + 1) = A(1 - 1, A(1, k + 1 - 1)) = A(0, A(1, k)) = A(0, k + 2) = k + 3 = (k + 1) + 2$.
+    \end{proof}
     
     \begin{definition}
-      Let $P$ be the set of all primitive recursive functions so that if $f(x_1, x_2, ..., x_n) \in P$ and
-      $m = max\{x_1, x_2, ..., x_n\}$, then there exists $t \in \mathbb{N}$ so that 
-      $f(x_1, x_2, ..., x_n) < A(t, m)$
+      Let $P$ be a set all primitive recursive functions $f$ so that if $f \in P$, there is a $t \in \mathbb{N}$
+      such that for any $x_1, ..., x_n \in \mathbb{N}$, $f(x_1, ..., x_n) < A(t, max\{x_1, ..., x_n\})$.
     \end{definition}
 
     \begin{theorem}
       $c(x)$, $s(x)$, $p_i(x_1, x_2, ..., x_n) \in P$
     \end{theorem}
     \begin{proof}
+      Let $m = max\{x_1, ..., x_n\}$.
+      Then
       \begin{equation*}
         \begin{aligned}
           c(x) = 0 < x + 1 &= A(0, x) \\
@@ -151,9 +168,6 @@
           p_i(x_1, x_2, ..., x_n) = x_i \leq m < m + 1 &= A(0, m) \\
         \end{aligned}
       \end{equation*}
-      To verify $x + 2 = A(1, x)$, we proceed by induction. \\
-      $A(1, 0) = A(1 - 1, 1) = A(0, 1) = 2 = 0 + 2$. Now assume $A(1, k) = k + 2$ for some $k \in \mathbb{N}$.
-      Then $A(1, k + 1) = A(1 - 1, A(1, k + 1 - 1)) = A(0, A(1, k)) = A(0, k + 2) = k + 3 = (k + 1) + 2$.
     \end{proof}
 
     \begin{theorem}
