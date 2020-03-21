@@ -282,5 +282,26 @@
   \section{General Recursive Functions}
     \subsection{Partial Functions}
     \subsection{Definition of General Recursive Functions}
+    \begin{definition}[Minimization]
+      % TODO: can f be a partial function?
+      Let $f: \mathbb{N}^n \rightarrow \mathbb{N}$ be an $n$-ary partial function. Then the minimization operator $\mu$
+      creates a $(n - 1)$-ary function $\mu(f)$ given by
+      \begin{equation*}
+        \begin{aligned}
+          \mu(f)(x_1, ..., x_n) &=
+          \begin{cases}
+            z                       & f(z, x_1, ..., x_n) = 0 \wedge f(i, x_1, ..., x_n) > 0 \forall i \in \mathbb{N} \cap [0, z) \\
+            undefined               & f(i, x_1, ..., x_n) \neq 0 \forall i \in \mathbb{N}
+          \end{cases}
+        \end{aligned}
+      \end{equation*}
+    \end{definition}
+    \begin{definition}
+      A function $f$ is a general recursive function if it is either:
+      \begin{enumerate}
+        \item A primitive recursive function
+        \item A general recursive function under the minimization operator
+      \end{enumerate}
+    \end{definition}
 
 \end{document}
