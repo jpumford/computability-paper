@@ -101,22 +101,24 @@
     \end{proof}
 
     \begin{theorem}
-      A(m, n) is a total function
+      $A$ is a total function
     \end{theorem}
     \begin{proof}
-      We will proceed inductively to show that $A(m, n)$ is defined for all $m, n \in \mathbb{N}$.
-      \\ 
-      \\
-      Clearly $A(0, n)$ is defined for all $n \in \mathbb{N}$.
-      Assume $A(k, n)$ is defined for some $k \in \mathbb{N}$ and every $n \in \mathbb{N}$.
-      Since $k + 1 > 0$, $A(k + 1, 0) = A(k, 1)$, which is defined.
-      \\
-      \\
-      Now we assume $A(k + 1, j)$ is defined for some $j \in \mathbb{N}$.
-      By Lemma \ref{inN}, $A(k + 1, j) = a$ for some $a \in \mathbb{N}$.
-      Then since $j + 1 > 0$, $A(k + 1, j + 1) = A(k, A(k + 1, j)) = A(k, a)$.
-      Since $A(k, n)$ is defined for every $n \in \mathbb{N}$ by our inductive hypothesis,
-      $A(k, a) = A(k + 1, j + 1)$ is defined.
+      By Theorem \label{inN}, all $n, m$ in the domain of $A$ have an image $A(n, m) \in \mathbb{N}$.
+      Therefore $A$ is a total function.
+      % We will proceed by double induction to show that $A(n, m)$ is defined for all $n, m \in \mathbb{N}$.
+      % \\ 
+      % \\
+      % Clearly $A(0, m)$ is defined for all $m \in \mathbb{N}$.
+      % Assume $A(k, m)$ is defined for some $k \in \mathbb{N}$ and every $m \in \mathbb{N}$.
+      % Then $A(k + 1, 0) = A(k, 1)$, which is defined by our hypothesis.
+      % \\
+      % \\
+      % Now assume $A(k + 1, j)$ is defined for some $j \in \mathbb{N}$.
+      % By Theorem \ref{inN}, $A(k + 1, j) = a$ for some $a \in \mathbb{N}$.
+      % Then since $j + 1 > 0$, $A(k + 1, j + 1) = A(k, A(k + 1, j)) = A(k, a)$.
+      % Since $A(k, n)$ is defined for every $n \in \mathbb{N}$ by our inductive hypothesis,
+      % $A(k, a) = A(k + 1, j + 1)$ is defined.
     \end{proof}
 
     \begin{theorem}
