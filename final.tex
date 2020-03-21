@@ -12,6 +12,9 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \newtheorem*{definition}{Definition}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
 
 % TODO: switch n and m around
 \begin{document}
@@ -64,7 +67,6 @@
         is a primitive recursive function
       \end{enumerate}
     \end{definition}
-    \subsection{}
 
   \section{The Ackermann Function}
     % nested loop
@@ -119,6 +121,12 @@
     \end{proof}
 
     \begin{theorem}
+      For any $m, n, s \in \mathbb{N}$ where $s > m$, $A(m, n) < A(s, n)$
+    \end{theorem}
+    \begin{proof}
+    \end{proof}
+
+    \begin{theorem}
       \label{plus2}
       For any $m, n, s \in \mathbb{N}$, $A(m, A(s, n)) < A(m + s + 2, n)$
     \end{theorem}
@@ -167,24 +175,65 @@
       So $h \in P$.
     \end{proof}
 
+    \begin{lemma}
+      \label{recursionlemma}
+      Let $h$ be the primitive recursion of two functions $f, g \in P$.
+      Let $x_1, ..., x_n \in \mathbb{N}$.
+      Let $m = max\{x_1, ..., x_n\}$.
+      Then there exists a $t \in \mathbb{N}$ such that for every $x \in \mathbb{N}
+      h(x, x_1, ..., x_n) < A(t, x + m)$.
+    \end{lemma}
+    \begin{proof}
+      Since $f, g \in P$, there exist $t_f$ and $t_g$ so that for every $x \in \mathbb{N}$, 
+      $f(x, h(x, x_1, ..., x_n), x_1, ..., x_n) < A(t_f, max\{x, h(x, x_1, ..., x_n), x_1, ..., x_n\})$ and
+      $g(x_1, ..., x_n) < A(t_g, max\{x_1, ..., x_n\})$.
+      Choose $t = $
+      We proceed by induction.
+      oh man I have no idea where to continue on this one
+      $h(0, x_1, ..., x_n) = g(x_1, ..., x_n) < $
+    \end{proof}
+
     \begin{theorem}
       $P$ is closed under primitive recursion
     \end{theorem}
     \begin{proof}
-      
+      Let $f, g \in P$ and $h$ be the primitive recursion of $f$ and $g$.
+      Let $x, x_1, ..., x_n \in \mathbb{N}$.
+      Let $m = max\{x_1, ..., x_n\}$.
+      Then by Lemma \ref{recursionlemma}, there is a $t \in \mathbb{N}$ so that
+      $h(x, x_1, ..., x_n) < A(t, x + m)$.
+      Let $m' = max\{x, x_1, ..., x_n\} = max\{x, m\}$.
+      Since $x + m \leq m'$, $A(t, x + m) \leq A(t, 2m')$ by Lemma \ref{lt}.
+      Since $2m' < 2m' + 3$, $A(t, 2m') < A(t, 2m' + 3)$ also by Lemma \ref{lt}.
+
+      % TODO: prove the following
+      By Lemma ?, $2m' + 3 = A(2, m')$, so $A(t, 2m' + 3) = A(t, A(2, m'))$.
+      By Theorem \ref{plus2}, $A(t, A(2, m')) = A(t + 2 + 2, m') = A(t + 4, m')$.
+      So $h(x, x_1, ..., x_n) < A(t + 4, m')$.
+
+      Therefore $h \in P$.
     \end{proof}
 
     \begin{theorem}
       $P$ is precisely the primitive recursive functions
     \end{theorem}
     \begin{proof}
+      All $f \in P$ are primitive recursive by the definition of $P$.
+      So it remains to show all primitive recursive functions are in $P$.
+      Let $f$ be a primitive recursive function.
+      Then $f$ can be created by applying function composition and primitive recursion to the constant, successor, and
+      projection functions. The constant, successor, and projection functions are all in $P$, and $P$ is closed under
+      function composition and primitive recursion. Therefore $f \in P$.
     \end{proof}
 
     \begin{theorem}
       $A(m, n)$ is not a primitive recursive function
     \end{theorem}
     \begin{proof}
-      Proof Here
+      Suppose that $A$ is a primitive recursive function. Then $A \in P$. Then there exists a $t \in \mathbb{N}$
+      so that for any $m, n \in \mathbb{N}$, $A(m, n) < A(t, max\{m, n\})$.
+      Set $m = n = t$. Then $max\{m, n\} = m = n = t$. So $A(m, n) = A(t, t) < A(t, t)$ which is a contradition.
+      Therefore $A$ is not primitive recursive.
     \end{proof}
 
 
