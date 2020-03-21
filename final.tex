@@ -68,6 +68,22 @@
       Since $A(k, n)$ is defined for every $n \in \mathbb{N}$ by our inductive hypothesis,
       $A(k, a) = A(k + 1, j + 1)$ is defined.
     \end{proof}
+
+    \begin{theorem}
+      \label{lt}
+      For any $m, n, s \in \mathbb{N}$ where $s > n$, $A(m, n) < A(m, s)$
+    \end{theorem}
+    \begin{proof}
+      Use the proof of A(m, n) < A(m, n + 1)
+    \end{proof}
+
+    \begin{theorem}
+      \label{plus2}
+      For any $m, n, s \in \mathbb{N}$, $A(m, A(s, n)) < A(m + s + 2, n)$
+    \end{theorem}
+    \begin{proof}
+      Proof here
+    \end{proof}
     
     \begin{definition}
       Let $P$ be the set of all primitive recursive functions so that if $f(x_1, x_2, ..., x_n) \in P$ and
@@ -95,9 +111,19 @@
       $P$ is closed under composition
     \end{theorem}
     \begin{proof}
-      Let $f, g_1, g_2, ..., g_n \in P$, where $f$ is $n$-ary and each $g_i$ is $m$-ary.
-      Then $f(g_1(x_1, ..., x_m))$
-      
+      Let $f, g_1, g_2, ..., g_k \in P$, where $f$ is $k$-ary and each $g_i$ is $j$-ary.
+      Let $x_1, x_2, ..., x_j \in \mathbb{N}$.
+      Let $m = max\{x_1, x_2, ..., x_j\}$.
+      Let $h$ be the $j$-ary primitive recursive function that results from function composition of $f$ with $g_1, g_2, ..., g_k$.
+      Let $g_{max}$ be the $g_i$ giving the maximum value in $max\{g_1(x_1, ..., x_j), ..., g_k(x_1, ..., x_j)\}$.
+      Let $m_g = g_{max}(x_1, ..., x_j)$
+      Since $g_{max} \in P$, there exists some $t_g \in \mathbb{N}$ so that $m_g < A(t_g, m)$.
+      Similarly since $f \in P$, there exists some $t_f \in \mathbb{N}$ so that $h(x_1, ..., x_j) = f(g_1(x_1, ..., x_j), ..., g_k(x_1, ..., x_j)) < A(t_f, m_g)$.
+      But since $m_g < A(t_g, m)$, by Theorem \ref{lt} $A(t_f, m_g) < A(t_f, A(t_g, m))$.
+      By Theorem \ref{plus2}, $A(t_f, A(t_g, m)) < A(t_f + t_g + 2, m)$.
+      Let $t = t_f + t_g + 2 \in \mathbb{N}$.
+      Then $h(x_1, .., x_j) < A(t, m)$.
+      So $h \in P$.
     \end{proof}
 
     \begin{theorem}
