@@ -104,7 +104,7 @@
       $A$ is a total function
     \end{theorem}
     \begin{proof}
-      By Theorem \label{inN}, all $n, m$ in the domain of $A$ have an image $A(n, m) \in \mathbb{N}$.
+      By Theorem \ref{inN}, all $n, m$ in the domain of $A$ have an image $A(n, m) \in \mathbb{N}$.
       Therefore $A$ is a total function.
       % We will proceed by double induction to show that $A(n, m)$ is defined for all $n, m \in \mathbb{N}$.
       % \\ 
@@ -122,11 +122,46 @@
     \end{proof}
 
     \begin{theorem}
-      \label{lt}
-      For any $m, n, s \in \mathbb{N}$ where $s > n$, $A(m, n) < A(m, s)$
+      \label{x+2=A(1,x)}
+      For any $x \in \mathbb{N}$, $A(1, x) = x + 2$
     \end{theorem}
     \begin{proof}
-      Use the proof of A(m, n) < A(m, n + 1)
+      We proceed by induction. \\
+      $A(1, 0) = A(1 - 1, 1) = A(0, 1) = 2 = 0 + 2$. Now assume $A(1, k) = k + 2$ for some $k \in \mathbb{N}$.
+      Then $A(1, k + 1) = A(1 - 1, A(1, k + 1 - 1)) = A(0, A(1, k)) = A(0, k + 2) = k + 3 = (k + 1) + 2$.
+    \end{proof}
+
+    \begin{lemma}
+      \label{m<A(n,m)}
+      For every $n, m \in \mathbb{N}$, $m < A(n, m)$
+    \end{lemma}
+    \begin{proof}
+      We proceed by induction.
+      Let $m \in \mathbb{N}$.
+      $A(0, m) = m + 1 > m$, so $m < A(0, m)$.
+      Now assume $m < A(k, m)$ for some $k \in \mathbb{N}$.
+      Then $A(k + 1, m) = $
+      Not done with this one yet
+    \end{proof}
+
+    \begin{theorem}
+      \label{lt}
+      For any $n, m, s \in \mathbb{N}$ where $m < s$, $A(n, m) < A(n, s)$
+    \end{theorem}
+    \begin{proof}
+      Let $m, s, n \in \mathbb{N}$
+      Since $m < s$ and $m, s \in \mathbb{N}$, we have a $d = s - m$ where $d \in \mathbb{Z}^+$.
+      We will proceed by induction to first show $A(n, m) < A(n, m + 1)$.
+      $A(0, m) = m + 1 < m + 1 + 1 = A(0, m + 1)$.
+      Assume $A(k, m) < A(k, m + 1)$ for some $k \in \mathbb{N}$.
+      By Lemma \ref{m<A(n,m)}, $A(k + 1, m) < A(k, A(k + 1, m)) = A(k + 1, m + 1)$.
+      So $A(k + 1, m) < A(k + 1, m + 1)$.
+      Therefore $A(n, m) < A(n, m + 1)$.
+      \\
+      \\
+      Now we use this result to construct a chain of $d$ inequalities $A(n, m) < A(n, m + 1) < A(n, m + 1 + 1) < ... < A(n, m + 1 + 1 + ... + 1)
+      = A(n, m + d) = A(n, s)$. 
+      % TODO: strong induction proof?
     \end{proof}
 
     \begin{theorem}
@@ -141,16 +176,6 @@
     \end{theorem}
     \begin{proof}
       Proof here
-    \end{proof}
-
-    \begin{theorem}
-      \label{x+2=A(1,x)}
-      For any $x \in \mathbb{N}$, $x + 2 = A(1, x)$
-    \end{theorem}
-    \begin{proof}
-      We proceed by induction. \\
-      $A(1, 0) = A(1 - 1, 1) = A(0, 1) = 2 = 0 + 2$. Now assume $A(1, k) = k + 2$ for some $k \in \mathbb{N}$.
-      Then $A(1, k + 1) = A(1 - 1, A(1, k + 1 - 1)) = A(0, A(1, k)) = A(0, k + 2) = k + 3 = (k + 1) + 2$.
     \end{proof}
     
     \begin{definition}
