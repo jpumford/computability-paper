@@ -24,6 +24,47 @@
       For this paper, $\mathbb{N}$ refers to the set $\{0, 1, 2, 3, ...\}$
 
       % zero function MUST accept one argument for further proofs to work
+    \begin{definition}
+      The following functions from $\mathbb{N} \oplus ... \oplus \mathbb{N}$ to $\mathbb{N}$
+      are primitive recursive functions:
+      \begin{enumerate}
+        \item The unary constant function $c$:
+        \begin{equation*}
+          c(x) = 0
+        \end{equation*}
+        \item The unary successor function $s$:
+        \begin{equation*}
+          s(x) = x + 1
+        \end{equation*}
+        \item The $n$-ary projection function $p$:
+        \begin{equation*}
+          \begin{gathered}
+            1 \leq i \leq n
+            \\
+            p(x_1, ..., x_n) = x_i
+          \end{gathered}
+        \end{equation*}
+        \item Function composition \\
+        Let $f$ be an $n$-ary primitive recursive function and $g_1, g_2, ..., g_n$ all be $m$-ary
+        primitive recursive functions. Then the $m$-ary composition $h$ of $f$ and $g_1, g_2, ..., g_n$ given by
+        \begin{equation*}
+          h(x_1, x_2, ..., x_m) = f(g_1(x_1, x_2, ..., x_m), ..., g_n(x_1, x_2, ..., x_m))
+        \end{equation*}
+        is a primitive recursive function
+        \item Primitive recursion
+        Let $g$ be an $n$-ary primitive recursive function and $f$ be an $(n + 2)$-ary primitive recursive
+        function. Then the $(n + 1)$-ary primitive recursion $h$ of $f$ and $g$ given by
+        \begin{equation*}
+          \begin{aligned}
+            h(0, x_1, ..., x_n) &= g(x_1, ..., x_n)
+            \\
+            h(s(x), x_1, ..., x_n) &= f(x, h(x, x_1, ..., x_n), x_1, ..., x_n)
+          \end{aligned}
+        \end{equation*}
+        is a primitive recursive function
+      \end{enumerate}
+    \end{definition}
+    \subsection{}
 
   \section{The Ackermann Function}
     % nested loop
