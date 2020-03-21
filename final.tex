@@ -91,12 +91,13 @@
     \begin{proof}
       We proceed by double induction. \\
       Clearly $A(0, k) \in \mathbb{N}$ for every $k \in \mathbb{N}$ because $k + 1 \in \mathbb{N}$.
-      Now assume $A(k, m) \in \mathbb{N}$ for some $k \in mathbb{N}$ for every $m \in \mathbb{N}$.
+      Now assume $A(k, m) \in \mathbb{N}$ for some $k \in \mathbb{N}$ for every $m \in \mathbb{N}$.
       Then $A(k + 1, 0) = A(k + 1 - 1, 1) = A(k, 1) \in \mathbb{N}$.
       Now assume $A(k + 1, j) \in \mathbb{N}$ for some $j \in \mathbb{N}$.
       Then $A(k + 1, j + 1) = A(k + 1 - 1, A(k + 1, j + 1 - 1)) = A(k, A(k + 1, j))$.
       By our second hypothesis $A(k + 1, j) \in \mathbb{N}$, so by our first hypothesis $A(k, A(k + 1, j)) \in \mathbb{N}$.
-      Therefore $A(k + 1, j + 1) \in \mathbb{N}$
+      Therefore $A(k + 1, j + 1) \in \mathbb{N}$. Then $A(k + 1, m) \in \mathbb{N}$ for every $m \in \mathbb{N}$, so
+      $A(n, m) \in \mathbb{N}$ for all choices of $n, m \in \mathbb{N}$
     \end{proof}
 
     \begin{theorem}
