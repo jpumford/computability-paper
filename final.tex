@@ -25,7 +25,6 @@
     \subsection{Functions}
       For this paper, $\mathbb{N}$ refers to the set $\{0, 1, 2, 3, ...\}$
 
-      % zero function MUST accept one argument for further proofs to work
     \begin{definition}
       The following functions from $\mathbb{N} \oplus ... \oplus \mathbb{N}$ to $\mathbb{N}$
       are primitive recursive functions:
@@ -151,28 +150,19 @@
       % TODO: strong induction proof?
     \end{proof}
 
-    \begin{theorem}
-      \label{a(n,m)<a(s,m)}
-      For any $n, m, s \in \mathbb{N}$ where $n < s$, $A(n, m) < A(s, m)$
-    \end{theorem}
-    \begin{proof}
-      % TODO!!!!!!!!!!!!!!!!!!!!!
-    \end{proof}
-
-    \begin{theorem}
-      \label{a(1,m)<=A(n,m+1)}
-      For any $n, m \in \mathbb{N}$, $A(1, m) \leq A(n, m + 1)$
-    \end{theorem}
-    \begin{proof}
-      We proceed by induction.
-      $A(1, m) = m + 2$ by Theorem \ref{x+2=A(1,x)}.
-      $m + 2 = A(0, m + 1)$.
-      Now assume $A(1, m) \leq A(k, m + 1)$.
-      Then since $A(k, m + 1) < A(k + 1, m + 1)$ by Theorem \ref{a(n,m)<a(s,m)},
-      $A(1, m) \leq A(k, m + 1) < A(k + 1, m + 1)$, so
-      $A(1, m) < A(k + 1, m + 1)$.
-    \end{proof}
-
+    % \begin{theorem}
+    %   \label{a(1,m)<=A(n,m+1)}
+    %   For any $n, m \in \mathbb{N}$, $A(1, m) \leq A(n, m + 1)$
+    % \end{theorem}
+    % \begin{proof}
+    %   We proceed by induction.
+    %   $A(1, m) = m + 2$ by Theorem \ref{x+2=A(1,x)}.
+    %   $m + 2 = A(0, m + 1)$.
+    %   Now assume $A(1, m) \leq A(k, m + 1)$.
+    %   Then since $A(k, m + 1) < A(k + 1, m + 1)$ by Theorem \ref{a(n,m)<a(s,m)},
+    %   $A(1, m) \leq A(k, m + 1) < A(k + 1, m + 1)$, so
+    %   $A(1, m) < A(k + 1, m + 1)$.
+    % \end{proof}
 
     \begin{theorem}
       \label{a(n,m+1)<=a(n+1,m)}
@@ -182,15 +172,51 @@
       We proceed by induction.
       $A(n, 0 + 1) = A(n, 1) = A(n + 1, 0)$ by the definition of the Ackermann function.
       Now assume $A(n, k + 1) \leq A(n + 1, k)$ for some $k \in \mathbb{N}$.
-      Note that $k + 2 = A(1, k)$ by Theorem \ref{x+2=A(1,x)}.
-      Then $A(n, k + 1 + 1) = A(n, k + 2) = A(n, A(1, k))$.
-      By Theorem \ref{a(1,m)<=A(n,m+1)}, $A(1, k) \leq A(n, k + 1)$.
-      By Theorem \ref{a(n,m)<a(n,s)}, $A(n, A(1, k)) \leq A(n, A(n, k + 1))$.
-      By our inductive hypothesis and Theorem \ref{a(n,m)<a(n,s)},
+      Note that $k + 1 < A(n, k + 1))$ by Theorem \ref{m<A(n,m)}.
+      So $k + 2 \leq A(n, k + 1)$.
+      Then $A(n, k + 2) \leq A(n, A(n, k + 1))$ by Theorem \ref{a(n,m)<a(n,s)}.
+      By our inductive hypothesis, $A(n, k + 1) \leq A(n + 1, k)$, so by Theorem \ref{a(n,m)<a(n,s)} again,
       $A(n, A(n, k + 1)) \leq A(n, A(n + 1, k))$.
-      And finally by the definition of the Ackermann function,
-      $A(n, A(n + 1, k)) = A(n + 1, k + 1)$.
-      So $A(n, k + 1 + 1) \leq A(n + 1, k + 1)$.
+      By the definition of the Ackermann function, $A(n, A(n + 1, k)) = A(n + 1, k + 1)$.
+      % Note that $k + 2 = A(1, k)$ by Theorem \ref{x+2=A(1,x)}.
+      % Then $A(n, k + 1 + 1) = A(n, k + 2) = A(n, A(1, k))$.
+      % By Theorem \ref{a(1,m)<=A(n,m+1)}, $A(1, k) \leq A(n, k + 1)$.
+      % By Theorem \ref{a(n,m)<a(n,s)}, $A(n, A(1, k)) \leq A(n, A(n, k + 1))$.
+      % By our inductive hypothesis and Theorem \ref{a(n,m)<a(n,s)},
+      % $A(n, A(n, k + 1)) \leq A(n, A(n + 1, k))$.
+      % And finally by the definition of the Ackermann function,
+      % $A(n, A(n + 1, k)) = A(n + 1, k + 1)$.
+      % So $A(n, k + 1 + 1) \leq A(n + 1, k + 1)$.
+    \end{proof}
+
+    \begin{theorem}
+      \label{a(n,m)<a(s,m)}
+      For any $n, m, s \in \mathbb{N}$ where $n < s$, $A(n, m) < A(s, m)$
+    \end{theorem}
+    \begin{proof}
+      Let $n, s, m \in \mathbb{N}$.
+      Since $n < s$ and $n, s \in \mathbb{N}$, we have a $d = s - n$ where $d \in \mathbb{Z}^+$.
+      We begin by showing $A(n, m) < A(n + 1, m)$.
+      $A(n, m) < A(n, m + 1)$ by Theorem \ref{a(n,m)<a(n,s)},
+      and $A(n, m + 1) \leq A(n + 1, m)$ by Theorem \ref{a(n,m+1)<=a(n+1,m)}.
+      So $A(n, m) < A(n + 1, m)$.
+      Now we use this result to construct a chain of $d$ inequalities $A(n, m) < A(n + 1, m) < A(n + 1 + 1, m) < ... < A(n + 1 + 1 + ... + 1, m)
+      = A(n + d, m) = A(s, m)$.
+      % Let $n, s, m \in \mathbb{N}$.
+      % Since $n < s$ and $n, s \in \mathbb{N}$, we have a $d = s - n$ where $d \in \mathbb{Z}^+$.
+      % We will proceed by induction to first show $A(n, m) < A(n + 1, m)$.
+      % $A(0, m) = m + 1 < m + 2 = A(1, m)$ by Theorem \ref{x+2=A(1,x)}.
+      % Assume $A(k, m) < A(k + 1, m)$ for some $k \in \mathbb{N}$.
+      % \begin{case}[$m = 0$]
+      %   Then $A(k + 2, m) = A(k + 2, 0) = A(k + 1, 1)$.
+      %   By Theorem \ref{a(n,m)<a(n,s)}, $A(k + 1, 1) > A(k + 1, 0)$.
+      %   $A(k + 1, 0) = A(k + 1, m) > A(k, m)$ by our inductive hypothesis, so $A(n + 1, m) < A(n + 2, m)$.
+      % \end{case}
+      % \begin{case}[$m \neq 0$]
+      %   Then $A(k + 2, m) \geq A(k + 1, m + 1)$ by Theorem \ref{a(n,m+1)<=a(n+1,m)}.
+      %   By Theorem \ref{a(n,m)<a(n,s)}, $A(n + 1, m + 1) > A(n + 1, m)$.
+      %   So $A(n + 1, m) < A(n + 2, m)$.
+      % \end{case}
     \end{proof}
 
     \begin{theorem}
