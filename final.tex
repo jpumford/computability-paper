@@ -145,7 +145,7 @@
     \end{proof}
 
     \begin{theorem}
-      \label{lt}
+      \label{a(n,m)<a(n,s)}
       For any $n, m, s \in \mathbb{N}$ where $m < s$, $A(n, m) < A(n, s)$
     \end{theorem}
     \begin{proof}
@@ -165,17 +165,30 @@
     \end{proof}
 
     \begin{theorem}
+      \label{a(n,m)<a(s,m)}
       For any $n, m, s \in \mathbb{N}$ where $n < s$, $A(n, m) < A(s, m)$
     \end{theorem}
     \begin{proof}
     \end{proof}
 
     \begin{theorem}
-      \label{plus2}
-      For any $m, n, s \in \mathbb{N}$, $A(m, A(s, n)) < A(m + s + 2, n)$
+      \label{a(n,m+1)<=a(n+1,m)}
+      For any $n, m \in \mathbb{N}$, $A(n, m + 1) \leq A(n + 1, m)$
     \end{theorem}
     \begin{proof}
-      Proof here
+      
+    \end{proof}
+
+    \begin{theorem}
+      \label{plus2}
+      For any $n, m, s \in \mathbb{N}$, $A(n, A(s, m)) < A(n + s + 2, m)$
+    \end{theorem}
+    \begin{proof}
+      $A(n, A(s, m)) < A(n + s, A(s, m))$ by Theorem \ref{a(n,m)<a(s,m)}.
+      $A(n + s, A(s, m)) < A(n + s, A(s + n + 1, m))$ by Theorem \ref{a(n,m)<a(n,s)} since, by Theorem \ref{a(n,m)<a(s,m)},
+      $A(s, m) < A(s + n + 1, m)$.
+      $A(n + s, A(s + n + 1, m)) = A(n + s, A(n + s + 1, m)) = A(n + s + 1, m + 1)$ by the definition of the Ackermann function.
+      Finally, $A(n + s + 1, m + 1) \leq A(n + s + 1 + 1, m) = A(n + s + 2, m)$ by Theorem \ref{a(n,m+1)<=a(n+1,m)}.
     \end{proof}
     
     \begin{definition}
