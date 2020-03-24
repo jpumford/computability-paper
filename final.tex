@@ -16,7 +16,6 @@
 \theoremstyle{case}
 \newtheorem{case}{Case}
 
-% TODO: switch n and m around
 \begin{document}
   \maketitle
 
@@ -303,8 +302,8 @@
     \end{theorem}
     \begin{proof}
       Suppose that $A$ is a primitive recursive function. Then $A \in P$. Then there exists a $t \in \mathbb{N}$
-      so that for any $m, n \in \mathbb{N}$, $A(m, n) < A(t, max\{m, n\})$.
-      Set $m = n = t$. Then $max\{m, n\} = m = n = t$. So $A(m, n) = A(t, t) < A(t, t)$ which is a contradition.
+      so that for any $n, m \in \mathbb{N}$, $A(n, m) < A(t, max\{n, m\})$.
+      Set $m = n = t$. Then $max\{n, m\} = n = m = t$. So $A(n, m) = A(t, t) < A(t, t)$ which is a contradition.
       Therefore $A$ is not primitive recursive.
     \end{proof}
 
