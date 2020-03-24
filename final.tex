@@ -106,19 +106,6 @@
     \begin{proof}
       By Theorem \ref{inN}, all $n, m$ in the domain of $A$ have an image $A(n, m) \in \mathbb{N}$.
       Therefore $A$ is a total function.
-      % We will proceed by double induction to show that $A(n, m)$ is defined for all $n, m \in \mathbb{N}$.
-      % \\ 
-      % \\
-      % Clearly $A(0, m)$ is defined for all $m \in \mathbb{N}$.
-      % Assume $A(k, m)$ is defined for some $k \in \mathbb{N}$ and every $m \in \mathbb{N}$.
-      % Then $A(k + 1, 0) = A(k, 1)$, which is defined by our hypothesis.
-      % \\
-      % \\
-      % Now assume $A(k + 1, j)$ is defined for some $j \in \mathbb{N}$.
-      % By Theorem \ref{inN}, $A(k + 1, j) = a$ for some $a \in \mathbb{N}$.
-      % Then since $j + 1 > 0$, $A(k + 1, j + 1) = A(k, A(k + 1, j)) = A(k, a)$.
-      % Since $A(k, n)$ is defined for every $n \in \mathbb{N}$ by our inductive hypothesis,
-      % $A(k, a) = A(k + 1, j + 1)$ is defined.
     \end{proof}
 
     \begin{theorem}
@@ -141,6 +128,7 @@
       $A(0, m) = m + 1 > m$, so $m < A(0, m)$.
       Now assume $m < A(k, m)$ for some $k \in \mathbb{N}$.
       Then $A(k + 1, m) = $
+      % TODO!!!!!!!!!!!!!!!!
       Not done with this one yet
     \end{proof}
 
@@ -169,6 +157,7 @@
       For any $n, m, s \in \mathbb{N}$ where $n < s$, $A(n, m) < A(s, m)$
     \end{theorem}
     \begin{proof}
+      % TODO!!!!!!!!!!!!!!!!!!!!!
     \end{proof}
 
     \begin{theorem}
@@ -249,7 +238,7 @@
       Let $m_g = g_{max}(x_1, ..., x_j)$
       Since $g_{max} \in P$, there exists some $t_g \in \mathbb{N}$ so that $m_g < A(t_g, m)$.
       Similarly since $f \in P$, there exists some $t_f \in \mathbb{N}$ so that $h(x_1, ..., x_j) = f(g_1(x_1, ..., x_j), ..., g_k(x_1, ..., x_j)) < A(t_f, m_g)$.
-      But since $m_g < A(t_g, m)$, by Theorem \ref{lt} $A(t_f, m_g) < A(t_f, A(t_g, m))$.
+      But since $m_g < A(t_g, m)$, by Theorem \ref{a(n,m)<a(n,s)} $A(t_f, m_g) < A(t_f, A(t_g, m))$.
       By Theorem \ref{plus2}, $A(t_f, A(t_g, m)) < A(t_f + t_g + 2, m)$.
       Let $t = t_f + t_g + 2 \in \mathbb{N}$.
       Then $h(x_1, .., x_j) < A(t, m)$.
@@ -270,6 +259,8 @@
       $g(x_1, ..., x_n) < A(t_g, max\{x_1, ..., x_n\})$.
       Choose $t = $
       We proceed by induction.
+      % TODO!!!!!!!!!!!!!!!!!!!!!!!!
+      % TODO: set t before choosing xs
       oh man I have no idea where to continue on this one
       $h(0, x_1, ..., x_n) = g(x_1, ..., x_n) < $
     \end{proof}
@@ -284,8 +275,8 @@
       Then by Lemma \ref{recursionlemma}, there is a $t \in \mathbb{N}$ so that
       $h(x, x_1, ..., x_n) < A(t, x + m)$.
       Let $m' = max\{x, x_1, ..., x_n\} = max\{x, m\}$.
-      Since $x + m \leq m'$, $A(t, x + m) \leq A(t, 2m')$ by Lemma \ref{lt}.
-      Since $2m' < 2m' + 3$, $A(t, 2m') < A(t, 2m' + 3)$ also by Lemma \ref{lt}.
+      Since $x + m \leq m'$, $A(t, x + m) \leq A(t, 2m')$ by Lemma \ref{a(n,m)<a(n,s)}.
+      Since $2m' < 2m' + 3$, $A(t, 2m') < A(t, 2m' + 3)$ also by Lemma \ref{a(n,m)<a(n,s)}.
 
       % TODO: prove the following
       By Lemma ?, $2m' + 3 = A(2, m')$, so $A(t, 2m' + 3) = A(t, A(2, m'))$.
@@ -322,7 +313,6 @@
     \subsection{Partial Functions}
     \subsection{Definition of General Recursive Functions}
     \begin{definition}[Minimization]
-      % TODO: can f be a partial function?
       Let $f: \mathbb{N}^n \rightarrow \mathbb{N}$ be an $n$-ary partial function. Then the minimization operator $\mu$
       creates a $(n - 1)$-ary function $\mu(f)$ given by
       \begin{equation*}
