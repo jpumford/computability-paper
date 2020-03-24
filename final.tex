@@ -172,11 +172,37 @@
     \end{proof}
 
     \begin{theorem}
+      \label{a(1,m)<=A(n,m+1)}
+      For any $n, m \in \mathbb{N}$, $A(1, m) \leq A(n, m + 1)$
+    \end{theorem}
+    \begin{proof}
+      We proceed by induction.
+      $A(1, m) = m + 2$ by Theorem \ref{x+2=A(1,x)}.
+      $m + 2 = A(0, m + 1)$.
+      Now assume $A(1, m) \leq A(k, m + 1)$.
+      Then since $A(k, m + 1) < A(k + 1, m + 1)$ by Theorem \ref{a(n,m)<a(s,m)},
+      $A(1, m) \leq A(k, m + 1) < A(k + 1, m + 1)$, so
+      $A(1, m) < A(k + 1, m + 1)$.
+    \end{proof}
+
+
+    \begin{theorem}
       \label{a(n,m+1)<=a(n+1,m)}
       For any $n, m \in \mathbb{N}$, $A(n, m + 1) \leq A(n + 1, m)$
     \end{theorem}
     \begin{proof}
-      
+      We proceed by induction.
+      $A(n, 0 + 1) = A(n, 1) = A(n + 1, 0)$ by the definition of the Ackermann function.
+      Now assume $A(n, k + 1) \leq A(n + 1, k)$ for some $k \in \mathbb{N}$.
+      Note that $k + 2 = A(1, k)$ by Theorem \ref{x+2=A(1,x)}.
+      Then $A(n, k + 1 + 1) = A(n, k + 2) = A(n, A(1, k))$.
+      By Theorem \ref{a(1,m)<=A(n,m+1)}, $A(1, k) \leq A(n, k + 1)$.
+      By Theorem \ref{a(n,m)<a(n,s)}, $A(n, A(1, k)) \leq A(n, A(n, k + 1))$.
+      By our inductive hypothesis and Theorem \ref{a(n,m)<a(n,s)},
+      $A(n, A(n, k + 1)) \leq A(n, A(n + 1, k))$.
+      And finally by the definition of the Ackermann function,
+      $A(n, A(n + 1, k)) = A(n + 1, k + 1)$.
+      So $A(n, k + 1 + 1) \leq A(n + 1, k + 1)$.
     \end{proof}
 
     \begin{theorem}
