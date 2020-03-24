@@ -230,6 +230,15 @@
       $A(n + s, A(s + n + 1, m)) = A(n + s, A(n + s + 1, m)) = A(n + s + 1, m + 1)$ by the definition of the Ackermann function.
       Finally, $A(n + s + 1, m + 1) \leq A(n + s + 1 + 1, m) = A(n + s + 2, m)$ by Theorem \ref{a(n,m+1)<=a(n+1,m)}.
     \end{proof}
+
+    \begin{theorem}
+      \label{a(2,m)=2m+3}
+      For any $m \in \mathbb{N}$, $A(2, m) = 2m + 3$
+    \end{theorem}
+    \begin{proof}
+      
+    \end{proof}
+
     
     \begin{definition}
       Let $P$ be a set all primitive recursive functions $f$ so that if $f \in P$, there is a $t \in \mathbb{N}$
@@ -261,8 +270,10 @@
       Let $h$ be the $j$-ary primitive recursive function that results from function composition of $f$ with $g_1, g_2, ..., g_k$.
       Let $g_{max}$ be the $g_i$ giving the maximum value in $max\{g_1(x_1, ..., x_j), ..., g_k(x_1, ..., x_j)\}$.
       Let $m_g = g_{max}(x_1, ..., x_j)$
-      Since $g_{max} \in P$, there exists some $t_g \in \mathbb{N}$ so that $m_g < A(t_g, m)$.
+      Since each $g_i \in P$, there is some $t_i$ for each $g_i$ such that $g_i(x_1, ..., x_j) < A(t_i, m)$.
+      Take $t_g = max\{t_1, t_2, ..., t_k\}$. Note this is not dependent on $x_1, ..., x_j$.
       Similarly since $f \in P$, there exists some $t_f \in \mathbb{N}$ so that $h(x_1, ..., x_j) = f(g_1(x_1, ..., x_j), ..., g_k(x_1, ..., x_j)) < A(t_f, m_g)$.
+      Note this is also not dependent on $x_1, ..., x_j$.
       But since $m_g < A(t_g, m)$, by Theorem \ref{a(n,m)<a(n,s)} $A(t_f, m_g) < A(t_f, A(t_g, m))$.
       By Theorem \ref{plus2}, $A(t_f, A(t_g, m)) < A(t_f + t_g + 2, m)$.
       Let $t = t_f + t_g + 2 \in \mathbb{N}$.
@@ -273,21 +284,34 @@
     \begin{lemma}
       \label{recursionlemma}
       Let $h$ be the primitive recursion of two functions $f, g \in P$.
-      Let $x_1, ..., x_n \in \mathbb{N}$.
-      Let $m = max\{x_1, ..., x_n\}$.
-      Then there exists a $t \in \mathbb{N}$ such that for every $x \in \mathbb{N}
-      h(x, x_1, ..., x_n) < A(t, x + m)$.
+      Then there exists a $t \in \mathbb{N}$ such that
+      for every $x, x_1, ..., x_n \in \mathbb{N}
+      h(x, x_1, ..., x_n) < A(t, x + max\{x_1, ..., x_n\})$.
     \end{lemma}
     \begin{proof}
-      Since $f, g \in P$, there exist $t_f$ and $t_g$ so that for every $x \in \mathbb{N}$, 
-      $f(x, h(x, x_1, ..., x_n), x_1, ..., x_n) < A(t_f, max\{x, h(x, x_1, ..., x_n), x_1, ..., x_n\})$ and
-      $g(x_1, ..., x_n) < A(t_g, max\{x_1, ..., x_n\})$.
-      Choose $t = $
+      Since $f, g \in P$, there exist $t_f$ and $t_g$ so that 
+      $f(x, y, x_1, ..., x_n) < A(t_f, max\{x, y, x_1, ..., x_n\})$ and
+      $g(x_1, ..., x_n) < A(t_g, max\{x_1, ..., x_n\})$ for any arguments of $f$ and $g$.
+      Let $t = 1 + max\{t_f, t_g\}$. Note that $t$ is not dependent on $x, x_1, ..., x_n$.
+      Let $x, x_1, ..., x_n \in \mathbb{N}$.
+      Let $m = max\{x_1, ..., x_n\}$.
       We proceed by induction.
-      % TODO!!!!!!!!!!!!!!!!!!!!!!!!
-      % TODO: set t before choosing xs
-      oh man I have no idea where to continue on this one
-      $h(0, x_1, ..., x_n) = g(x_1, ..., x_n) < $
+      $h(0, x_1, ..., x_n) = g(x_1, ..., x_n) < A(t_g, m) < A(t, m) = A(t, m + 0)$.
+      Now assume $h(k, x_1, ..., x_n) < A(t, max\{m, k\})$ for some $k \in \mathbb{N}$.
+      Let $m_{k+1} = max\{k, h(k, x_1, ..., x_n), m\}$.
+      Then $h(k + 1, x_1, ..., x_n) = f(k, h(k, x_1, ..., x_n), x_1, ..., x_n) < A(t_f, m_{k+1})$.
+      Now note that $m_{k+1} < A(t, k + m)$:
+      \begin{enumerate}
+        \item $m \leq k + m < A(t, k + m)$ by Theorem \ref{m<A(n,m)}
+        \item $k \leq k + m < A(t, k + m)$ by Theorem \ref{m<A(n,m)}
+        \item $h(k, x_1, ..., x_n) < A(t, max\{m, k\})$ by our induction hypothesis, and $A(t, max\{m, k\}) \leq
+        A(t, k + m)$ by Theorem \ref{a(n,m)<a(n,s)} since $max\{m, k\} \leq k + m$
+      \end{enumerate}
+      By Theorem \ref{a(n,m)<a(n,s)}, $A(t_f, m_{k+1}) < A(t_f, A(t, k + m))$.
+      Since $t = 1 + max\{t_f, t_g\}$, $t_f \leq t - 1$.
+      Then by Theorem \ref{a(n,m)<a(n,s)} and since $t \neq 0$, $A(t_f, A(t, k + m)) \leq A(t - 1, A(t, k + m))$.
+      By the definition of the Ackermann function, $A(t - 1, A(t, k + m)) = A(t, k + m + 1)$.
+      Therefore $h(k + 1, x_1, ..., x_n) < A(t, (k + 1) + m)$
     \end{proof}
 
     \begin{theorem}
@@ -299,16 +323,13 @@
       Let $m = max\{x_1, ..., x_n\}$.
       Then by Lemma \ref{recursionlemma}, there is a $t \in \mathbb{N}$ so that
       $h(x, x_1, ..., x_n) < A(t, x + m)$.
-      Let $m' = max\{x, x_1, ..., x_n\} = max\{x, m\}$.
-      Since $x + m \leq m'$, $A(t, x + m) \leq A(t, 2m')$ by Lemma \ref{a(n,m)<a(n,s)}.
+      Let $m' = max\{x, m\}$.
+      Since $x + m \leq 2m'$, $A(t, x + m) \leq A(t, 2m')$ by Lemma \ref{a(n,m)<a(n,s)}.
       Since $2m' < 2m' + 3$, $A(t, 2m') < A(t, 2m' + 3)$ also by Lemma \ref{a(n,m)<a(n,s)}.
-
-      % TODO: prove the following
-      By Lemma ?, $2m' + 3 = A(2, m')$, so $A(t, 2m' + 3) = A(t, A(2, m'))$.
-      By Theorem \ref{plus2}, $A(t, A(2, m')) = A(t + 2 + 2, m') = A(t + 4, m')$.
-      So $h(x, x_1, ..., x_n) < A(t + 4, m')$.
-
-      Therefore $h \in P$.
+      By Theorem \ref{a(2,m)=2m+3}, $2m' + 3 = A(2, m')$.
+      Therefore $A(t, 2m' + 3) = A(t, A(2, m'))$.
+      By Theorem \ref{plus2}, $A(t, A(2, m')) < A(t + 2 + 2, m') = A(t + 4, m')$.
+      Therefore $h(x, x_1, ..., x_n) < A(t + 4, m')$.
     \end{proof}
 
     \begin{theorem}
