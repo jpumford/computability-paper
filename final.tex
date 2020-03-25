@@ -326,9 +326,17 @@
       For any $m \in \mathbb{N}$, $A(2, m) = 2m + 3$
     \end{theorem}
     \begin{proof}
-      % TODO
+      % mine, derived on own
+      We proceed by induction
+      \\
+      \\
+      $A(2, 0) = A(1, 1) = 1 + 2 = 3 = 0 + 3$ by Theorem \ref{x+2=A(1,x)}.
+      \\
+      \\
+      Now assume $A(2, k) = 2k + 3$ for some $k \in \mathbb{N}$.
+      Then $A(2, k + 1) = A(1, A(2, k)) = A(1, 2k + 3)$ by Theorem \ref{x+2=A(1,x)}.
+      $A(1, 2k + 3) = 2k + 3 + 2 = 2k + 5 = 2(k + 1) + 3$ also by Theorem \ref{x+2=A(1,x)}.
     \end{proof}
-
     
     \begin{definition}
       Let $P$ be a set all primitive recursive functions so that if $f \in P$, there is a $t \in \mathbb{N}$
@@ -500,4 +508,7 @@
       \end{enumerate}
     \end{definition}
   That the Ackermann function is a general recursive function is beyond the scope of this paper.
+  
+  \section{Thanks}
+  % TODO
 \end{document}
