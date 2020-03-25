@@ -45,11 +45,10 @@
     Obviously this definition is not mathematically rigorous enough for us to use in a proof.
     We can, however, capture the essence in this definition by constructing functions. These will capture ideas familiar
     to computer scientists and programmers, such as function "composition" and "loops", all of which are able to be done via pencil and 
-    paper by a sufficiently patient and long-lived individual. These definitions were formalized in the early part of the 1900s.
+    paper by a sufficiently patient and long-lived individual. These definitions were formalized in the first half of the 1900s.
 
   \section{Primitive Recursive Functions}
-    \subsection{Functions}
-      For this paper, $\mathbb{N}$ refers to the set $\{0, 1, 2, 3, ...\}$
+    For this paper, $\mathbb{N}$ refers to the set $\{0\} \cup \mathbb{Z}^+ = \{0, 1, 2, 3, ...\}$
     
     \begin{definition}
       A total function $f$ from a set $X$ to a set $Y$ is a subset of the Cartesian product $X \times Y$ so that the following hold:
@@ -109,6 +108,12 @@
         is a primitive recursive function
       \end{enumerate}
     \end{definition}
+  
+  Intuitively the primitive recursive functions are all operations that a human could do with pencil and paper.
+  Besides the requirement that there are a finite number of steps, we have something that seems to adhere
+  to the spirit of effective calculability. Note also that all primitive recursive functions are total.
+  But are there total functions that could conceivably be performed by a human with a pencil and paper, and 
+  enumerated by steps that require no "ingenuity"?
 
   \section{The Ackermann Function}
     % nested loop
@@ -125,6 +130,10 @@
         \end{aligned}
       \end{equation*}
     \end{definition}
+
+    The Ackermann function looks pretty easy, while lengthy, the compute with pencil and paper. It requires no ingenuity
+    or creativity to compute. As we will see below, it is also a total function. But we will find a startling result
+    with sufficient development of a series of proofs.
 
     \begin{theorem}
       \label{inN}
@@ -160,10 +169,10 @@
       Then $A(1, k + 1) = A(1 - 1, A(1, k + 1 - 1)) = A(0, A(1, k)) = A(0, k + 2) = k + 3 = (k + 1) + 2$.
     \end{proof}
 
-    \begin{lemma}
+    \begin{theorem}
       \label{m<A(n,m)}
       For every $n, m \in \mathbb{N}$, $m < A(n, m)$
-    \end{lemma}
+    \end{theorem}
     \begin{proof}
       We proceed by double induction.
       $A(0, 0) = 0 + 1 = 1 > 0$.
@@ -189,7 +198,7 @@
       We will proceed by induction to first show $A(n, m) < A(n, m + 1)$.
       $A(0, m) = m + 1 < m + 1 + 1 = A(0, m + 1)$.
       Assume $A(k, m) < A(k, m + 1)$ for some $k \in \mathbb{N}$.
-      By Lemma \ref{m<A(n,m)}, $A(k + 1, m) < A(k, A(k + 1, m)) = A(k + 1, m + 1)$.
+      By Theorem \ref{m<A(n,m)}, $A(k + 1, m) < A(k, A(k + 1, m)) = A(k + 1, m + 1)$.
       So $A(k + 1, m) < A(k + 1, m + 1)$.
       Therefore $A(n, m) < A(n, m + 1)$.
       \\
@@ -285,7 +294,7 @@
       For any $m \in \mathbb{N}$, $A(2, m) = 2m + 3$
     \end{theorem}
     \begin{proof}
-      
+      % TODO
     \end{proof}
 
     
@@ -373,8 +382,8 @@
       Then by Lemma \ref{recursionlemma}, there is a $t \in \mathbb{N}$ so that
       $h(x, x_1, ..., x_n) < A(t, x + m)$.
       Let $m' = max\{x, m\}$.
-      Since $x + m \leq 2m'$, $A(t, x + m) \leq A(t, 2m')$ by Lemma \ref{a(n,m)<a(n,s)}.
-      Since $2m' < 2m' + 3$, $A(t, 2m') < A(t, 2m' + 3)$ also by Lemma \ref{a(n,m)<a(n,s)}.
+      Since $x + m \leq 2m'$, $A(t, x + m) \leq A(t, 2m')$ by Theorem \ref{a(n,m)<a(n,s)}.
+      Since $2m' < 2m' + 3$, $A(t, 2m') < A(t, 2m' + 3)$ also by Theorem \ref{a(n,m)<a(n,s)}.
       By Theorem \ref{a(2,m)=2m+3}, $2m' + 3 = A(2, m')$.
       Therefore $A(t, 2m' + 3) = A(t, A(2, m'))$.
       By Theorem \ref{plus2}, $A(t, A(2, m')) < A(t + 2 + 2, m') = A(t + 4, m')$.
@@ -403,9 +412,18 @@
       Therefore $A$ is not primitive recursive.
     \end{proof}
 
+    $A$ is not a primitive recursive function! In fact, our definition of calculability is incomplete. We need one
+    more operator to capture the Ackermann function. For the curious reader we will enumerate the general recursive functions,
+    but it is beyond the scope of this paper to show the Ackermann function is a general recursive function.
 
   \section{General Recursive Functions}
     \subsection{Partial Functions}
+      \begin{definition}
+        A partial function $f$ from a set $X$ to a set $Y$ is a subset of the Cartesian product $X \times Y$ so that
+        $(x, y) \in f \wedge (x, y) \implies y = z$.
+      \end{definition}
+      Note that all total functions are partial functions, but not all partial functions are total functions because
+      a partial function $f$ may be undefined for some $x \in X$.
     \subsection{Definition of General Recursive Functions}
     \begin{definition}[Minimization]
       Let $f: \mathbb{N}^n \rightarrow \mathbb{N}$ be an $n$-ary partial function. Then the minimization operator $\mu$
@@ -427,5 +445,5 @@
         \item A general recursive function under the minimization operator
       \end{enumerate}
     \end{definition}
-
+  That the Ackermann function is a general recursive function is beyond the scope of this paper.
 \end{document}
