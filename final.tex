@@ -142,8 +142,10 @@
     \begin{proof}
       We proceed by double induction. \\
       Clearly $A(0, k) \in \mathbb{N}$ for every $k \in \mathbb{N}$ because $k + 1 \in \mathbb{N}$.
+      \\
       Now assume $A(k, m) \in \mathbb{N}$ for some $k \in \mathbb{N}$ for every $m \in \mathbb{N}$.
       Then $A(k + 1, 0) = A(k + 1 - 1, 1) = A(k, 1) \in \mathbb{N}$.
+      \\
       Now assume $A(k + 1, j) \in \mathbb{N}$ for some $j \in \mathbb{N}$.
       Then $A(k + 1, j + 1) = A(k + 1 - 1, A(k + 1, j + 1 - 1)) = A(k, A(k + 1, j))$.
       By our second hypothesis $A(k + 1, j) \in \mathbb{N}$, so by our first hypothesis $A(k, A(k + 1, j)) \in \mathbb{N}$.
@@ -157,6 +159,7 @@
     \begin{proof}
       By Theorem \ref{inN}, all $n, m$ in the domain of $A$ have an image $A(n, m) \in \mathbb{N}$.
       Therefore $A$ is a total function.
+      % TODO: well defined?
     \end{proof}
 
     \begin{theorem}
@@ -165,7 +168,9 @@
     \end{theorem}
     \begin{proof}
       We proceed by induction. \\
-      $A(1, 0) = A(1 - 1, 1) = A(0, 1) = 2 = 0 + 2$. Now assume $A(1, k) = k + 2$ for some $k \in \mathbb{N}$.
+      $A(1, 0) = A(1 - 1, 1) = A(0, 1) = 2 = 0 + 2$.
+      \\
+      Now assume $A(1, k) = k + 2$ for some $k \in \mathbb{N}$.
       Then $A(1, k + 1) = A(1 - 1, A(1, k + 1 - 1)) = A(0, A(1, k)) = A(0, k + 2) = k + 3 = (k + 1) + 2$.
     \end{proof}
 
@@ -175,12 +180,15 @@
     \end{theorem}
     \begin{proof}
       We proceed by double induction.
+      \\
       $A(0, 0) = 0 + 1 = 1 > 0$.
       Clearly $A(0, m) = m + 1 > m$ for every $m \in \mathbb{N}$.
+      \\
       Now assume $m < A(k, m)$ for some $k \in \mathbb{N}$ for every $m \in \mathbb{N}$.
-      Now we show that $m < A(k + 1, m)$ for every $m \in \mathbb{N}$.
+      % Now we show that $m < A(k + 1, m)$ for every $m \in \mathbb{N}$.
       $A(k + 1, 0) = A(k, 1)$. By our inductive hypothesis, $A(k, 1) > 1 > 0$,
-      So $A0 < A(k + 1, 0)$.
+      So $0 < A(k + 1, 0)$.
+      \\
       Now assume $j < A(k + 1, j)$ for some $j \in \mathbb{N}$.
       Then $A(k + 1, j + 1) = A(k, A(k + 1, j))$.
       By our first inductive hypothesis, $A(k + 1, j) < A(k, A(k + 1, j))$.
@@ -195,8 +203,11 @@
     \begin{proof}
       Let $m, s, n \in \mathbb{N}$
       Since $m < s$ and $m, s \in \mathbb{N}$, we have a $d = s - m$ where $d \in \mathbb{Z}^+$.
+      \\
       We will proceed by induction to first show $A(n, m) < A(n, m + 1)$.
+      \\
       $A(0, m) = m + 1 < m + 1 + 1 = A(0, m + 1)$.
+      \\
       Assume $A(k, m) < A(k, m + 1)$ for some $k \in \mathbb{N}$.
       By Theorem \ref{m<A(n,m)}, $A(k + 1, m) < A(k, A(k + 1, m)) = A(k + 1, m + 1)$.
       So $A(k + 1, m) < A(k + 1, m + 1)$.
@@ -228,7 +239,9 @@
     \end{theorem}
     \begin{proof}
       We proceed by induction.
+      \\
       $A(n, 0 + 1) = A(n, 1) = A(n + 1, 0)$ by the definition of the Ackermann function.
+      \\
       Now assume $A(n, k + 1) \leq A(n + 1, k)$ for some $k \in \mathbb{N}$.
       Note that $k + 1 < A(n, k + 1))$ by Theorem \ref{m<A(n,m)}.
       So $k + 2 \leq A(n, k + 1)$.
@@ -255,9 +268,13 @@
       Let $n, s, m \in \mathbb{N}$.
       Since $n < s$ and $n, s \in \mathbb{N}$, we have a $d = s - n$ where $d \in \mathbb{Z}^+$.
       We begin by showing $A(n, m) < A(n + 1, m)$.
+      \\
+      \\
       $A(n, m) < A(n, m + 1)$ by Theorem \ref{a(n,m)<a(n,s)},
       and $A(n, m + 1) \leq A(n + 1, m)$ by Theorem \ref{a(n,m+1)<=a(n+1,m)}.
       So $A(n, m) < A(n + 1, m)$.
+      \\
+      \\
       Now we use this result to construct a chain of $d$ inequalities $A(n, m) < A(n + 1, m) < A(n + 1 + 1, m) < ... < A(n + 1 + 1 + ... + 1, m)
       = A(n + d, m) = A(s, m)$.
       % Let $n, s, m \in \mathbb{N}$.
@@ -285,6 +302,7 @@
       $A(n, A(s, m)) < A(n + s, A(s, m))$ by Theorem \ref{a(n,m)<a(s,m)}.
       $A(n + s, A(s, m)) < A(n + s, A(s + n + 1, m))$ by Theorem \ref{a(n,m)<a(n,s)} since, by Theorem \ref{a(n,m)<a(s,m)},
       $A(s, m) < A(s + n + 1, m)$.
+      \\
       $A(n + s, A(s + n + 1, m)) = A(n + s, A(n + s + 1, m)) = A(n + s + 1, m + 1)$ by the definition of the Ackermann function.
       Finally, $A(n + s + 1, m + 1) \leq A(n + s + 1 + 1, m) = A(n + s + 2, m)$ by Theorem \ref{a(n,m+1)<=a(n+1,m)}.
     \end{proof}
@@ -299,7 +317,7 @@
 
     
     \begin{definition}
-      Let $P$ be a set all primitive recursive functions $f$ so that if $f \in P$, there is a $t \in \mathbb{N}$
+      Let $P$ be a set all primitive recursive functions so that if $f \in P$, there is a $t \in \mathbb{N}$
       such that for any $x_1, ..., x_n \in \mathbb{N}$, $f(x_1, ..., x_n) < A(t, max\{x_1, ..., x_n\})$.
     \end{definition}
 
@@ -326,12 +344,18 @@
       Let $x_1, x_2, ..., x_j \in \mathbb{N}$.
       Let $m = max\{x_1, x_2, ..., x_j\}$.
       Let $h$ be the $j$-ary primitive recursive function that results from function composition of $f$ with $g_1, g_2, ..., g_k$.
-      Let $g_{max}$ be the $g_i$ giving the maximum value in $max\{g_1(x_1, ..., x_j), ..., g_k(x_1, ..., x_j)\}$.
-      Let $m_g = g_{max}(x_1, ..., x_j)$
+      Let $g_{max}$ be the $g_i$ giving the maximum value in
+      \\
+      $max\{g_1(x_1, ..., x_j), ..., g_k(x_1, ..., x_j)\}$.
+      Let $m_g = g_{max}(x_1, ..., x_j)$.
+      \\
+      \\
       Since each $g_i \in P$, there is some $t_i$ for each $g_i$ such that $g_i(x_1, ..., x_j) < A(t_i, m)$.
       Take $t_g = max\{t_1, t_2, ..., t_k\}$. Note this is not dependent on $x_1, ..., x_j$.
       Similarly since $f \in P$, there exists some $t_f \in \mathbb{N}$ so that $h(x_1, ..., x_j) = f(g_1(x_1, ..., x_j), ..., g_k(x_1, ..., x_j)) < A(t_f, m_g)$.
       Note this is also not dependent on $x_1, ..., x_j$.
+      \\
+      \\
       But since $m_g < A(t_g, m)$, by Theorem \ref{a(n,m)<a(n,s)} $A(t_f, m_g) < A(t_f, A(t_g, m))$.
       By Theorem \ref{plus2}, $A(t_f, A(t_g, m)) < A(t_f + t_g + 2, m)$.
       Let $t = t_f + t_g + 2 \in \mathbb{N}$.
@@ -353,11 +377,16 @@
       Let $t = 1 + max\{t_f, t_g\}$. Note that $t$ is not dependent on $x, x_1, ..., x_n$.
       Let $x, x_1, ..., x_n \in \mathbb{N}$.
       Let $m = max\{x_1, ..., x_n\}$.
+      \\
+      \\
       We proceed by induction.
+      \\
       $h(0, x_1, ..., x_n) = g(x_1, ..., x_n) < A(t_g, m) < A(t, m) = A(t, m + 0)$.
+      \\
       Now assume $h(k, x_1, ..., x_n) < A(t, max\{m, k\})$ for some $k \in \mathbb{N}$.
       Let $m_{k+1} = max\{k, h(k, x_1, ..., x_n), m\}$.
       Then $h(k + 1, x_1, ..., x_n) = f(k, h(k, x_1, ..., x_n), x_1, ..., x_n) < A(t_f, m_{k+1})$.
+      \\
       Now note that $m_{k+1} < A(t, k + m)$:
       \begin{enumerate}
         \item $m \leq k + m < A(t, k + m)$ by Theorem \ref{m<A(n,m)}
@@ -379,8 +408,10 @@
       Let $f, g \in P$ and $h$ be the primitive recursion of $f$ and $g$.
       Let $x, x_1, ..., x_n \in \mathbb{N}$.
       Let $m = max\{x_1, ..., x_n\}$.
+      \\
       Then by Lemma \ref{recursionlemma}, there is a $t \in \mathbb{N}$ so that
       $h(x, x_1, ..., x_n) < A(t, x + m)$.
+      \\
       Let $m' = max\{x, m\}$.
       Since $x + m \leq 2m'$, $A(t, x + m) \leq A(t, 2m')$ by Theorem \ref{a(n,m)<a(n,s)}.
       Since $2m' < 2m' + 3$, $A(t, 2m') < A(t, 2m' + 3)$ also by Theorem \ref{a(n,m)<a(n,s)}.
@@ -394,8 +425,10 @@
       $P$ is precisely the primitive recursive functions
     \end{theorem}
     \begin{proof}
-      All $f \in P$ are primitive recursive by the definition of $P$.
-      So it remains to show all primitive recursive functions are in $P$.
+      All $f \in P$ are primitive recursive by the definition of $P$,
+      so it remains to show all primitive recursive functions are in $P$.
+      \\
+      \\
       Let $f$ be a primitive recursive function.
       Then $f$ can be created by applying function composition and primitive recursion to the constant, successor, and
       projection functions. The constant, successor, and projection functions are all in $P$, and $P$ is closed under
@@ -408,6 +441,8 @@
     \begin{proof}
       Suppose that $A$ is a primitive recursive function. Then $A \in P$. Then there exists a $t \in \mathbb{N}$
       so that for any $n, m \in \mathbb{N}$, $A(n, m) < A(t, max\{n, m\})$.
+      \\
+      \\
       Set $m = n = t$. Then $max\{n, m\} = n = m = t$. So $A(n, m) = A(t, t) < A(t, t)$ which is a contradition.
       Therefore $A$ is not primitive recursive.
     \end{proof}
