@@ -108,7 +108,7 @@
 
     \begin{theorem}
       \label{x+2=A(1,x)}
-      For any $x \in \mathbb{N}$, $A(1, x) = x + 2$
+      For any $m \in \mathbb{N}$, $A(1, m) = m + 2$
     \end{theorem}
     \begin{proof}
       We proceed by induction. \\
@@ -121,13 +121,18 @@
       For every $n, m \in \mathbb{N}$, $m < A(n, m)$
     \end{lemma}
     \begin{proof}
-      We proceed by induction.
-      Let $m \in \mathbb{N}$.
-      $A(0, m) = m + 1 > m$, so $m < A(0, m)$.
-      Now assume $m < A(k, m)$ for some $k \in \mathbb{N}$.
-      Then $A(k + 1, m) = $
-      % TODO!!!!!!!!!!!!!!!!
-      Not done with this one yet
+      We proceed by double induction.
+      $A(0, 0) = 0 + 1 = 1 > 0$.
+      Clearly $A(0, m) = m + 1 > m$ for every $m \in \mathbb{N}$.
+      Now assume $m < A(k, m)$ for some $k \in \mathbb{N}$ for every $m \in \mathbb{N}$.
+      Now we show that $m < A(k + 1, m)$ for every $m \in \mathbb{N}$.
+      $A(k + 1, 0) = A(k, 1)$. By our inductive hypothesis, $A(k, 1) > 1 > 0$,
+      So $A0 < A(k + 1, 0)$.
+      Now assume $j < A(k + 1, j)$ for some $j \in \mathbb{N}$.
+      Then $A(k + 1, j + 1) = A(k, A(k + 1, j))$.
+      By our first inductive hypothesis, $A(k + 1, j) < A(k, A(k + 1, j))$.
+      By our second inductive hypothesis, $j < A(k + 1, j)$.
+      So $j + 1 \leq A(k + 1, j) < A(k, A(k + 1, j)) = A(k + 1, j + 1)$.
     \end{proof}
 
     \begin{theorem}
