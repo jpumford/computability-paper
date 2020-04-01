@@ -20,16 +20,17 @@
   \maketitle
 
   \section{Effective Calculability and Computability}
-    How does one rigorously define what functions can be calculated by means of an algorithm?
-    It is easy to see that $f(x) = x^3 + 2$ can be calculated by a combination of algorithms for exponents
-    and addition.
+    How would one rigorously define what functions can be calculated by means of an algorithm?
+    It is easy to see that the function $f(x) = x^3 + 2$ can be calculated by a combination of the well-known algorithms for
+    evaluating exponents and addition.
     \\
     \\
-    But what about $isRing(X, +, *)$, a function that accepts a set and two binary operators?
+    But what about $isRing(X, i, +, *)$, a function that accepts a set, a unary operator, and two binary operators?
     It returns $0$ if the set is not a ring under the given operations, and $1$ if the set is a ring under the given operations.
     \\
     \\
-    Many problems in math employ creativity in solving and may not always have a step-by-step way of solving them.
+    Many problems in math employ creativity in solving and may not always have a step-by-step way of solving them,
+    like determining if an arbitrary set under certain operations is a ring or not.
     Is there a way to separate what can be solved via an algorithm and what cannot?
     \\
     \\
@@ -43,9 +44,11 @@
       \item requires no ingenuity to complete
     \end{enumerate}
     Obviously this definition is not mathematically rigorous enough for us to use in a proof.
-    We can, however, capture the essence in this definition by constructing functions. These will capture ideas familiar
+    We can, however, capture the essence in this definition by constructing special functions that are built on steps
+    of an algorithm.
+    These will capture ideas familiar
     to computer scientists and programmers, such as function "composition" and "loops", all of which are able to be done via pencil and 
-    paper by a sufficiently patient and long-lived individual. These definitions were formalized in the first half of the 1900s.
+    paper by a sufficiently patient individual. These are not new definitions, and were formalized in the first half of the 1900s.
 
   \section{Primitive Recursive Functions}
     For this paper, $\mathbb{N}$ refers to the set $\{0\} \cup \mathbb{Z}^+ = \{0, 1, 2, 3, ...\}$
@@ -54,22 +57,21 @@
       A total function $f$ from a set $X$ to a set $Y$ is a subset of the Cartesian product $X \times Y$ so that the following hold:
       \begin{equation*}
         \begin{gathered}
-          \forall x \in X \exists y \in Y : (x, y) \in f \\
+          \forall x \in X \; \exists y \in Y : (x, y) \in f \\
           (x, y) \in f \wedge (x, z) \in f \implies y = z
         \end{gathered}
       \end{equation*}
-      such that each $x \in X$ only shows in exactly one element $(x, y) \in f$.
     \end{definition}
 
-    All functions are total unless otherwise indicated.
+    All functions hereafter are total unless otherwise indicated.
 
     \begin{definition}
-      A function $f: X \rightarrow Y$ has arity $n$ if $X$ is composed of $n$-tuples from sets $X_1, ..., X_n$.
+      A function $f: X \rightarrow Y$ has arity $n$ if $X = X_1 \times X_2 \times ... \times X_n$, the $n$-ary Cartesian product of sets $X_1, ..., X_n$.
       If $X$ is not composed of tuples at all, then the $f$ is unary.
     \end{definition}
 
     \begin{definition}
-      The following functions from $\mathbb{N} \oplus ... \oplus \mathbb{N}$ to $\mathbb{N}$
+      The following functions from $\mathbb{N} \times ... \times \mathbb{N}$ to $\mathbb{N}$
       are primitive recursive functions:
       \begin{enumerate}
         \item The unary constant function $c$:
@@ -80,7 +82,7 @@
         \begin{equation*}
           s(x) = x + 1
         \end{equation*}
-        \item The $n$-ary projection function $p$:
+        \item The $n$-ary projection function $p_i$:
         \begin{equation*}
           \begin{gathered}
             1 \leq i \leq n
@@ -113,7 +115,7 @@
   Besides the requirement that there are a finite number of steps, we have something that seems to adhere
   to the spirit of effective calculability. Note also that all primitive recursive functions are total.
   But are there total functions that could conceivably be performed by a human with a pencil and paper, and 
-  enumerated by steps that require no "ingenuity"?
+  enumerated by steps that require no "ingenuity", that are not primitive recursive?
 
   \section{The Ackermann Function}
     % nested loop
@@ -131,7 +133,7 @@
       \end{equation*}
     \end{definition}
 
-    The Ackermann function looks pretty easy, while lengthy, to compute with pencil and paper. It requires no ingenuity
+    The Ackermann function looks simple, while lengthy, to compute with pencil and paper. It requires no ingenuity
     or creativity to compute. As we will see below, it is also a total function. But we will find a startling result
     with sufficient development of a series of proofs.
 
@@ -474,7 +476,7 @@
       Therefore $A$ is not primitive recursive.
     \end{proof}
 
-    $A$ is not a primitive recursive function! In fact, our definition of calculability is incomplete. We need one
+    $A$ is not a primitive recursive function! In fact, our rigorous enumeration of calculable functions is incomplete. We need one
     more operator to capture the Ackermann function. For the curious reader we will enumerate the general recursive functions,
     but it is beyond the scope of this paper to show the Ackermann function is a general recursive function.
 
@@ -510,6 +512,9 @@
   That the Ackermann function is a general recursive function is beyond the scope of this paper.
   
   \section{Thanks}
-    Thanks to Dr. Don Faurot for his help with one of the tougher proofs.
+    \begin{enumerate}
+      \item Dr. Don Faurot for his help on one of the tougher proofs.
+      \item "planetmath" user CWoo for proof sketches of properties of the Ackermann function
+    \end{enumerate}
   % TODO
 \end{document}
